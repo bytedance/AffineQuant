@@ -1,4 +1,4 @@
-# AffineQuant: Affine Transformation Quantization for Large Language Models
+# AffineQuant: Affine Transformation Quantization for Large Language Models ([Link](https://arxiv.org/pdf/2403.12544.pdf))
 
 
 
@@ -14,6 +14,7 @@ AffineQuant is a simple and powerful quantization technique for LLMs.
   - [Usage](#usage)
   - [Results](#results)
   - [Related Project](#related-project)
+  - [Citation](#citation)
 
 ## Install
 ```
@@ -107,3 +108,15 @@ More detailed and optional arguments:
 
 [AutoGPTQ](https://github.com/PanQiWei/AutoGPTQ)
 
+## Citation
+
+```latex
+@inproceedings{
+ma2024affinequant,
+title={AffineQuant: Affine Transformation Quantization for Large Language Models},
+author={Yuexiao Ma and Huixia Li and Xiawu Zheng and Feng Ling and Xuefeng Xiao and Rui Wang and Shilei Wen and Fei Chao and Rongrong Ji},
+booktitle={The Twelfth International Conference on Learning Representations},
+year={2024},
+url={https://openreview.net/forum?id=of2rhALq8l}
+}
+```
