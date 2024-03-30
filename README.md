@@ -20,7 +20,7 @@ AffineQuant is a simple and powerful quantization technique for LLMs.
 ```
 conda create -n affinequant python=3.10 -y
 conda activate affinequant
-git clone https://github.com/anonymousiclr1842/AffineQuant.git
+git clone https://github.com/bytedance/AffineQuant.git
 cd AffineQuant
 pip install --upgrade pip 
 pip install -e .
@@ -51,13 +51,13 @@ python generate_act_scale_shift.py --model /PATH/TO/LLaMA/llama-7b
 CUDA_VISIBLE_DEVICES=0 python main.py \
 --model /PATH/TO/LLaMA/llama-7b  \
 --epochs 20 --output_dir ./log/llama-7b-w3a16 \
---eval_ppl --wbits 3 --abits 16 --lwc --let
+--eval_ppl --wbits 3 --abits 16 --lwc --let --use_ln_matrix --sf 1e-2
 
 # W3A16g128
 CUDA_VISIBLE_DEVICES=0 python main.py \
 --model /PATH/TO/LLaMA/llama-7b  \
 --epochs 20 --output_dir ./log/llama-7b-w3a16g128 \
---eval_ppl --wbits 3 --abits 16 --group_size 128 --lwc --let
+--eval_ppl --wbits 3 --abits 16 --group_size 128 --lwc --let --use_ln_matrix --sf 1e-2
 ```
 
 3. weight-activation quantization
@@ -66,8 +66,8 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
 CUDA_VISIBLE_DEVICES=0 python main.py \
 --model /PATH/TO/LLaMA/llama-7b  \
 --epochs 20 --output_dir ./log/llama-7b-w4a4 \
---eval_ppl --wbits 4 --abits 4 --lwc --let \
---tasks piqa,arc_easy,arc_challenge,boolq,hellaswag,winogrande
+--eval_ppl --wbits 4 --abits 4 --lwc --let --aug_loss --use_matrix --sf 0.1 \
+--tasks hendrycksTest,piqa,arc_easy,arc_challenge,boolq,hellaswag,winogrande
 ```
 
 More detailed and optional arguments:
@@ -83,6 +83,9 @@ More detailed and optional arguments:
 - `--multigpu`: to inference larger network on multiple GPUs
 - `--real_quant`: real quantization, which can see memory reduce
 - `--save_dir`: saving the quantization model for further exploration.
+- `--use_matrix`: using qkt affine mateix or not.
+- `--use_ln_matrix`: using layernorm affine matrix.
+- `--sf`: stability factor for gradual mask.
 
 
 ## Results
